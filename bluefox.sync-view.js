@@ -72,12 +72,12 @@ window.customElements.define("sync-view", class extends HTMLElement {
       };
 
       SyncView.sync = () => {
-        let fromObj = getProperty(
+        let fromObj = this.getProperty(
           SyncView.fromProperty,
           SyncView.from,
           SyncView.separator
         );
-        let toObj = getProperty(
+        let toObj = this.getProperty(
           SyncView.toProperty,
           SyncView.to,
           SyncView.separator

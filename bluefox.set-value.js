@@ -44,7 +44,7 @@ window.customElements.define("set-value", class extends HTMLElement {
     );
     target.events = this.attributes.events ? JSON.parse(this.attributes.events.value) : ["sync"];
 
-    events.forEach((eventType) => {
+    target.events.forEach((eventType) => {
       this.addEventListener(eventType, async (event) => {
         if (target.object.object[target.object.property] != this.attributes.value.value) {
           try {
