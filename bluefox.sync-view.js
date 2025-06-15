@@ -31,6 +31,7 @@ window.customElements.define("sync-view", class extends HTMLElement {
       events: this.attributes.events ? JSON.parse(this.attributes.events.value) : ["sync"],
       entryNop: !!this.attributes.entryNop,
       waitActivate: !!this.attributes.waitActivate,
+      default: this.attributes.default ? this.attributes.default.value : "",
     };
 
     let init = (syncer) => {
@@ -68,6 +69,7 @@ window.customElements.define("sync-view", class extends HTMLElement {
         toProperty: to.slice(1).join(separator),
         events: syncer.events,
         entryNop: syncer.entryNop,
+        default: syncer.default,
         init: init,
       };
 
@@ -83,7 +85,11 @@ window.customElements.define("sync-view", class extends HTMLElement {
           SyncView.separator
         );
         try {
-          toObj.object[toObj.property] = fromObj.object[fromObj.property];
+          if (!!SyncView.default && !fromObj.object[fromObj.property]) {
+            toObj.object[toObj.property] = SyncView.default;
+          } else {
+            toObj.object[toObj.property] = fromObj.object[fromObj.property];
+          }
         } catch { }
       };
 
